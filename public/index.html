@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SlitzUp | Divide bills, not friends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/config.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="ambient-bg" aria-hidden="true"></div>
+
+    <main class="shell">
+      <header class="topbar card reveal">
+        <div>
+          <p class="eyebrow">SlitzUp</p>
+          <h1>Divide bills, not friends</h1>
+        </div>
+        <div class="profile" id="profileBox">
+        </div>
+      </header>
+
+      <section class="grid-layout">
+        <aside class="panel card reveal" id="groupsPanel">
+          <div class="panel-head">
+            <h2>Groups</h2>
+          </div>
+
+          <div class="stack">
+            <label for="groupSelect">Current group</label>
+            <select id="groupSelect" disabled>
+              <option value="">No group selected</option>
+            </select>
+          </div>
+
+          <form id="createGroupForm" class="stack bordered">
+            <h3>Create Group</h3>
+            <input id="groupNameInput" type="text" placeholder="Goa Trip" required />
+            <button class="btn secondary" type="submit">Create Group</button>
+          </form>
+
+          <form id="addMemberForm" class="stack bordered">
+            <h3>Add Member</h3>
+            <input id="memberNameInput" type="text" placeholder="Rahul" required />
+            <button class="btn ghost" type="submit">Add Member</button>
+          </form>
+
+          <div class="stack invite-box" id="groupInfo">
+            <p class="muted">Members are simple names in this organizer-only app.</p>
+          </div>
+
+          <div class="stack members-box" id="membersInfo">
+            <h3>Members</h3>
+            <div class="chip-row" id="memberChips"></div>
+          </div>
+        </aside>
+
+        <section class="panel reveal">
+          <article class="card expense-card">
+            <div class="panel-head">
+              <h2>Add Expense</h2>
+            </div>
+
+            <form id="expenseForm" class="expense-form">
+              <div class="field-row two">
+                <label>
+                  Expense name
+                  <input id="expenseName" type="text" placeholder="Pizza" required />
+                </label>
+                <label>
+                  Amount (INR)
+                  <input id="expenseAmount" type="number" min="0" step="0.01" placeholder="1200" required />
+                </label>
+              </div>
+
+              <div class="field-row two">
+                <label>
+                  Who paid?
+                  <select id="expensePayer" required></select>
+                </label>
+                <label>
+                  Split type
+                  <select id="splitType" required>
+                    <option value="equal">Equal</option>
+                    <option value="percentage">Percentage</option>
+                    <option value="exact">Exact</option>
+                  </select>
+                </label>
+              </div>
+
+              <div id="splitInputs" class="split-grid"></div>
+
+              <button class="btn primary" type="submit">Add Expense</button>
+            </form>
+          </article>
+
+          <article class="card balances-card">
+            <div class="panel-head">
+              <h2>Balances</h2>
+              <button id="refreshBalancesBtn" class="btn mini">Refresh</button>
+            </div>
+            <div id="balancesList" class="balances-list"></div>
+          </article>
+
+          <article class="card ledger-card">
+            <div class="panel-head">
+              <h2>Expense Ledger</h2>
+            </div>
+            <div id="expensesList" class="expenses-list"></div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+  </body>
+</html>
